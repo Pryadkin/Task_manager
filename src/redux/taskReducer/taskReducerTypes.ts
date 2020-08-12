@@ -1,4 +1,8 @@
 export interface ITaskReducer {
-  tasklist: Array<string>,
-  popupIsVisible: boolean
+  tasklist: {
+    id: number
+    title: string
+  }[],
+  popupIsVisible: boolean,
+  tasksDetailsPage: boolean,
 };

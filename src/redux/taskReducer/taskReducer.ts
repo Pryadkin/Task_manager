@@ -3,24 +3,27 @@ import { Reducer } from 'redux';
 import { ITaskReducer } from './taskReducerTypes';
 
 import {
+  GET_LIST,
   ADD_TASK,
-  POPUP_IS_VISIBLE
+  POPUP_IS_VISIBLE,
+  TASK_DETAILS_IS_VISIBLE
 } from '../actions/actions';
 
-
 const initialState = {
-  tasklist: [
-    'Задача 1',
-    'Задача 2',
-    'Задача 3',
-    'Задача 4',
-  ],
-  popupIsVisible: false
+  tasklist: [],
+  popupIsVisible: false,
+  tasksDetailsPage: false
 };
 
 export const taskReducer: Reducer<ITaskReducer> = (state = initialState, action) => {
   switch (action.type) {
+    case GET_LIST:
+      return {
+        ...state,
+        tasklist: action.payload
+      };
     case ADD_TASK:
+      console.log(action.payload)
       return {
         ...state,
         tasklist: [action.payload, ...state.tasklist]
@@ -29,6 +32,11 @@ export const taskReducer: Reducer<ITaskReducer> = (state = initialState, action)
       return {
         ...state,
         popupIsVisible: !state.popupIsVisible
+      };
+    case TASK_DETAILS_IS_VISIBLE:
+      return {
+        ...state,
+        tasksDetailsPage: !state.tasksDetailsPage
       }
     default:
       return state;

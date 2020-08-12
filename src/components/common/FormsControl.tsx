@@ -9,26 +9,28 @@ interface IFormControl {
   }
 }
 
-// const FormControl: React.FC<IFormControl> = ({ input, meta, ...props }) => {
-//   const isError = meta.touched && meta.error;
-
-//   return (
-
-//   )
-// };
-
-export const Input: React.FC<IFormControl> = (props) => {
-
-  // const isError = meta.touched && meta.error;
-  console.log(props)
+export const Input: React.FC<IFormControl> = ({ input, meta, ...restProps }) => {
+  const isError = meta.touched && meta.error;
 
   return (
-    // <div className={[styles.formControl, isError ? styles.error : null].join(' ')}>
-    <div >
+    <div className={[styles.formControl, isError ? styles.error : null].join(' ')}>
       <div>
-        <input {...props} />
+        <input {...input} {...restProps} />
       </div>
-      {/* {isError && <span>{meta.error}</span>} */}
+      {isError && <span>{meta.error}</span>}
+    </div>
+  )
+};
+
+export const InputDetails: React.FC<IFormControl> = ({ input, meta, ...restProps }) => {
+  const isError = meta.touched && meta.error;
+
+  return (
+    <div className={[styles.formControl, isError ? styles.error : null].join(' ')}>
+      <div>
+        <input {...input} {...restProps} />
+      </div>
+      {isError && <span>{meta.error}</span>}
     </div>
   )
 };

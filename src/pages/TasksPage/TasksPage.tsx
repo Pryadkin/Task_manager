@@ -1,16 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { InjectedFormProps } from 'redux-form';
-import TaskList from '../components/TaskList/TaskList';
-import { IApplicationState } from '../redux/rootReducer/rootReducerType';
-import { addTask, changeVisibilityPopup } from '../redux/actions/actions';
+import TaskList from '../../components/TaskList/TaskList';
+import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
+import { addTaskAsync, changeVisibilityPopup } from '../../redux/actions/actions';
 
 import s from './TasksPage.module.scss';
-import AddTaskPopupFormRedux from '../components/AddTaskPopup/AddTaskPopup';
-
-// export interface IUser {
-//   addTaskPopupInput: string
-// }
+import AddTaskPopup from '../../components/AddTaskPopup/AddTaskPopup';
 
 const TasksPage = () => {
   const dispatch = useDispatch();
@@ -18,8 +13,7 @@ const TasksPage = () => {
   const popupIsVisible = useSelector((state: IApplicationState) => state.taskReducer.popupIsVisible);
 
   const onAddTask = (value: any) => {
-    console.log(value)
-    dispatch(addTask(value.addTaskPopupInput));
+    dispatch(addTaskAsync(value.addTaskPopupInput));
     dispatch(changeVisibilityPopup());
   };
 
@@ -33,6 +27,7 @@ const TasksPage = () => {
         <h2 className={s.title}>
           Список заданий
         </h2>
+
         <div
           className={s.button}
           onClick={popupVisibleHandler}
@@ -42,10 +37,13 @@ const TasksPage = () => {
       </div>
 
       {popupIsVisible
-        ? <AddTaskPopupFormRedux onSubmit={onAddTask} />
+        ?
+        <AddTaskPopup
+          onSubmit={onAddTask}
+          popupVisibleHandler={popupVisibleHandler}
+        />
         : null
       }
-
 
       {tasklist
         ? <TaskList tasklist={tasklist} />

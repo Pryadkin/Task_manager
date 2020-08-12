@@ -4,16 +4,18 @@ import { required, maxLengthCreator } from '../../utils/validators';
 import { Input } from '../common/FormsControl';
 
 import s from './AddTaskPopup.module.scss';
-
-interface IProps {
-  message: string;
-}
+import closeIcon from '../../img/close.png';
 
 const maxLength20 = maxLengthCreator(20);
 
-const AddTaskPopup: React.FC<InjectedFormProps> = (props) => {
+export interface IProps {
+  popupVisibleHandler: () => void
+}
+
+const AddTaskPopup: React.FC<IProps & InjectedFormProps<{}, IProps>> = props => {
   const {
     handleSubmit,
+    popupVisibleHandler
   } = props;
 
   return (
@@ -39,12 +41,21 @@ const AddTaskPopup: React.FC<InjectedFormProps> = (props) => {
           onClick={handleSubmit}
         >
           add task
-      </div>
+        </div>
+
+
+        <img
+          className={s.closeIcon}
+          onClick={popupVisibleHandler}
+          src={closeIcon}
+          alt="close"
+        />
+
       </form>
     </>
   )
 }
 
-export default reduxForm({
+export default reduxForm<{}, IProps>({
   form: 'addTaskPopupForm',
 })(AddTaskPopup);

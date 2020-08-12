@@ -20,9 +20,16 @@
   z-index: 1;  
 }
 
-
 .addTaskBtn {
   width: 100px;
   padding: 10px;
   border: 1px solid black;
+}
+
+.closeIcon {
+  position: absolute;
+  width: 20px;  
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
