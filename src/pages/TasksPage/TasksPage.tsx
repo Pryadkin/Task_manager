@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TaskList from '../../components/TaskList/TaskList';
 import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
-import { addTaskAsync, changeVisibilityPopup } from '../../redux/actions/actions';
+import { addTaskAsync, deletTaskAsync, changeVisibilityPopup } from '../../redux/actions/actions';
 
 import s from './TasksPage.module.scss';
 import AddTaskPopup from '../../components/AddTaskPopup/AddTaskPopup';
@@ -12,13 +12,18 @@ const TasksPage = () => {
   const tasklist = useSelector((state: IApplicationState) => state.taskReducer.tasklist);
   const popupIsVisible = useSelector((state: IApplicationState) => state.taskReducer.popupIsVisible);
 
-  const onAddTask = (value: any) => {
-    dispatch(addTaskAsync(value.addTaskPopupInput));
+  const onAddTask = (title: string) => {
+    console.log(title)
+    dispatch(addTaskAsync(title));
     dispatch(changeVisibilityPopup());
   };
 
   const popupVisibleHandler = () => {
     dispatch(changeVisibilityPopup())
+  };
+
+  const deleteTask = (id: number) => {
+    dispatch(deletTaskAsync(id))
   };
 
   return (
@@ -39,14 +44,18 @@ const TasksPage = () => {
       {popupIsVisible
         ?
         <AddTaskPopup
-          onSubmit={onAddTask}
+          onAddTask={onAddTask}
           popupVisibleHandler={popupVisibleHandler}
         />
         : null
       }
 
       {tasklist
-        ? <TaskList tasklist={tasklist} />
+        ?
+        <TaskList
+          tasklist={tasklist}
+          deleteTask={deleteTask}
+        />
         : null
       }
     </>

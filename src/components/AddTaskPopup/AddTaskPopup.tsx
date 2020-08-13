@@ -1,44 +1,65 @@
 import React from 'react';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { required, maxLengthCreator } from '../../utils/validators';
-import { Input } from '../common/FormsControl';
+import { useForm } from 'react-hook-form';
 
 import s from './AddTaskPopup.module.scss';
 import closeIcon from '../../img/close.png';
 
-const maxLength20 = maxLengthCreator(20);
 
 export interface IProps {
+  onAddTask: (addTask: string) => void,
   popupVisibleHandler: () => void
 }
 
-const AddTaskPopup: React.FC<IProps & InjectedFormProps<{}, IProps>> = props => {
+interface ITaskForm {
+  addTask: string
+};
+
+const AddTaskPopup: React.FC<IProps> = props => {
   const {
-    handleSubmit,
+    onAddTask,
     popupVisibleHandler
   } = props;
+
+  const { register, handleSubmit, errors } = useForm<ITaskForm>();
+
+  const onSubmit = handleSubmit((data) => {
+    onAddTask(data.addTask);
+  });
 
   return (
     <>
       <div className={s.background} />
       <form
         className={s.form}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
         <div className={s.title}>
           Краткое описание
         </div>
 
-        <Field
-          name='addTaskPopupInput'
-          component={Input}
-          validate={[required, maxLength20]}
+
+        <input
+          name="addTask"
           className={s.addTaskPopupInput}
+          type="text"
+          ref={register({
+            maxLength: 20,
+            required: true
+          })}
         />
+
+        {
+          errors.addTask?.type === "required" &&
+          "Your input is required"
+        }
+        {
+          errors.addTask?.type === "maxLength" &&
+          "Your input exceed maxLength"
+        }
 
         <div
           className={s.addTaskBtn}
-          onClick={handleSubmit}
+          onClick={onSubmit}
         >
           add task
         </div>
@@ -56,6 +77,4 @@ const AddTaskPopup: React.FC<IProps & InjectedFormProps<{}, IProps>> = props => 
   )
 }
 
-export default reduxForm<{}, IProps>({
-  form: 'addTaskPopupForm',
-})(AddTaskPopup);
+export default AddTaskPopup;

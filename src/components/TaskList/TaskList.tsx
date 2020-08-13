@@ -7,10 +7,15 @@ interface ITaskList {
   tasklist: {
     id: number,
     title: string
-  }[]
+  }[],
+  deleteTask: (id: number) => void
 }
 
-const TaskList = ({ tasklist }: ITaskList) => {
+const TaskList = (props: ITaskList) => {
+  const {
+    tasklist,
+    deleteTask
+  } = props;
   const history = useHistory();
 
   const goToDetails = (id: number) => {
@@ -48,6 +53,7 @@ const TaskList = ({ tasklist }: ITaskList) => {
 
                     <td
                       className={s.del}
+                      onClick={() => deleteTask(task.id)}
                     >
                       {'delete'}
                     </td>

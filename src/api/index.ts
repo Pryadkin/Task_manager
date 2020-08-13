@@ -5,16 +5,20 @@ const instance = axios.create({
 });
 
 export const listAPI = {
-  getList() {
+  async getList() {
     return instance.get('/')
       .then(res => res.data)
   },
-  addTask(task: string) {
+  async addTask(task: string) {
     return instance.post('/', { title: task })
-      .then(res => res)
+      .then(res => res.data)
   },
-  editTask(id: number, task: string) {
+  async editTask(id: number, task: string) {
     return instance.post(`/${id}`, { title: task })
-      .then(res => res)
+      .then(res => res.data)
+  },
+  async deleteTask(id: number) {
+    return instance.delete(`/${id}`)
+      .then(res => res.data)
   }
-}
+};

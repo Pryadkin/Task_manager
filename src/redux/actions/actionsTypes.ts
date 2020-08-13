@@ -2,7 +2,10 @@ import {
   GET_LIST,
   GET_LIST_ASYNC,
   ADD_TASK,
+  EDIT_TASK,
   EDIT_TASK_ASYNC,
+  DELETE_TASK,
+  DELETE_TASK_ASYNC,
   POPUP_IS_VISIBLE,
   TASK_DETAILS_IS_VISIBLE,
   ADD_TASK_ASYNC
@@ -20,15 +23,14 @@ export type TGetList = {
 
 export type TGetListAsync = {
   type: typeof GET_LIST_ASYNC
-  // payload: {
-  //   id: number,
-  //   title: string
-  // }
 };
 
 export type TAddTask = {
   type: typeof ADD_TASK
-  payload: TTask
+  payload: {
+    id: number,
+    title: string
+  }
 };
 
 export type TAddTaskAsync = {
@@ -36,9 +38,30 @@ export type TAddTaskAsync = {
   payload: string
 };
 
+export type TEditTask = {
+  type: typeof EDIT_TASK
+  payload: {
+    id: number,
+    title: string
+  }
+};
+
 export type TEditTaskAsync = {
   type: typeof EDIT_TASK_ASYNC
-  payload: string
+  payload: {
+    id: number,
+    title: string
+  }
+};
+
+export type IDeleteTask = {
+  type: typeof DELETE_TASK
+  payload: number
+};
+
+export type TDeleteTaskAsync = {
+  type: typeof DELETE_TASK_ASYNC
+  payload: number
 };
 
 export type TChangeVisibilityPopup = {
