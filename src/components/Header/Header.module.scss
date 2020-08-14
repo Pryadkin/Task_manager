@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+
+.title {
+  font-family: RobotoBold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 37px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 148px;
+  height: 36px;
+  left: 64px;
+  top: 586px;
+  border: 1px solid #39B54A;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 16px;
+  transition: .2s;
+
+  &:hover {
+    background: #39B54A;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+}

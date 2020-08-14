@@ -3,9 +3,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 100px;
-  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 120px;
+  padding: 30px;
+  border: 1px solid #F2F2F2;
+  border-radius: 5px;
   background-color: white;
   z-index: 5;
 }
@@ -20,16 +24,40 @@
   z-index: 1;  
 }
 
-.addTaskBtn {
-  width: 100px;
-  padding: 10px;
-  border: 1px solid black;
+.title {
+  display: block;
+  width: 120px;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+.input {
+  width: 97%;
+  background-color: #F2F2F2;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.btn {
+  align-self: flex-end;
+  margin-top: 13px;
 }
 
 .closeIcon {
   position: absolute;
   width: 20px;  
-  top: 0;
-  right: 0;
+  top: 32px;
+  right: 30px;
   cursor: pointer;
+}
+
+.warning {
+  position: absolute;
+  width: 200px;
+  top: 105px;
+  color: #FF0000;
+  font-size: 12px;
 }

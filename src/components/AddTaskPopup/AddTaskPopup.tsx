@@ -1,11 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Button from '../Button/Button';
 
 import s from './AddTaskPopup.module.scss';
-import closeIcon from '../../img/close.png';
+import { ReactComponent as ReactCloseIcon } from '../../img/close.svg';
 
-
-export interface IProps {
+interface IProps {
   onAddTask: (addTask: string) => void,
   popupVisibleHandler: () => void
 }
@@ -33,46 +33,49 @@ const AddTaskPopup: React.FC<IProps> = props => {
         className={s.form}
         onSubmit={onSubmit}
       >
-        <div className={s.title}>
+        <label htmlFor="addTask" className={s.title}>
           Краткое описание
-        </div>
-
+        </label>
 
         <input
+          id="addTask"
           name="addTask"
-          className={s.addTaskPopupInput}
+          className={s.input}
           type="text"
           ref={register({
-            maxLength: 20,
+            maxLength: 40,
             required: true
           })}
         />
 
         {
           errors.addTask?.type === "required" &&
-          "Your input is required"
+          <span className={s.warning}>
+            Заголовок не может быть пустым
+          </span>
         }
+
         {
           errors.addTask?.type === "maxLength" &&
-          "Your input exceed maxLength"
+          <span className={s.warning}>
+            Описание не должно превышать 40 символов
+          </span>
         }
 
-        <div
-          className={s.addTaskBtn}
-          onClick={onSubmit}
-        >
-          add task
+        <div className={s.btn}>
+          <Button
+            text="Создать"
+            onClick={onSubmit}
+            color="green"
+          />
         </div>
-
-
-        <img
-          className={s.closeIcon}
-          onClick={popupVisibleHandler}
-          src={closeIcon}
-          alt="close"
-        />
-
       </form>
+
+      <ReactCloseIcon
+        className={s.closeIcon}
+        onClick={popupVisibleHandler}
+        title="Закрыть"
+      />
     </>
   )
 }

@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 
 import s from './TaskList.module.scss';
 
+import { ReactComponent as ReactEditIcon } from '../../img/edit.svg';
+import { ReactComponent as ReactDeleteIcon } from '../../img/delete.svg';
+
 interface ITaskList {
   tasklist: {
     id: number,
@@ -23,7 +26,7 @@ const TaskList = (props: ITaskList) => {
   };
 
   return (
-    <div className="container">
+    <div className={s.container}>
       <table>
         <tbody>
 
@@ -45,18 +48,23 @@ const TaskList = (props: ITaskList) => {
                     </td>
 
                     <td
-                      className={s.del}
-                      onClick={() => goToDetails(task.id)}
+                      className={s.edit_del}
                     >
-                      {'edit'}
+
+                      <ReactEditIcon
+                        className={s.editIcon}
+                        onClick={() => goToDetails(task.id)}
+                        title="Редактировать"
+                      />
+
+                      <ReactDeleteIcon
+                        className={s.deleteIcon}
+                        onClick={() => deleteTask(task.id)}
+                        title="Удалить"
+                      />
                     </td>
 
-                    <td
-                      className={s.del}
-                      onClick={() => deleteTask(task.id)}
-                    >
-                      {'delete'}
-                    </td>
+
                   </tr>
                 </React.Fragment>
               )
