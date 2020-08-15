@@ -2,6 +2,7 @@ import { Reducer } from 'react';
 import { ITaskReducer } from './taskReducerTypes';
 
 import {
+  CHANGE_TASK_LIST_LOADING,
   GET_LIST,
   ADD_TASK,
   EDIT_TASK,
@@ -13,6 +14,7 @@ import {
 
 const initialState: ITaskReducer = {
   tasklist: [],
+  taskListIsLoading: false,
   popupIsVisible: false,
   popupDelete: false,
   tasksDetailsPage: false
@@ -25,6 +27,11 @@ interface IAction {
 
 export const taskReducer: Reducer<ITaskReducer, IAction> = (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_TASK_LIST_LOADING:
+      return {
+        ...state,
+        taskListIsLoading: !state.taskListIsLoading
+      };
     case GET_LIST:
       return {
         ...state,

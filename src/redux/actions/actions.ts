@@ -1,5 +1,6 @@
 import {
   TTask,
+  TTaskListLoading,
   TGetList,
   TGetListAsync,
   TAddTask,
@@ -13,6 +14,7 @@ import {
   TChangeVisibilityTasksDetailsPage
 } from './actionsTypes';
 
+export const CHANGE_TASK_LIST_LOADING = 'CHANGE_TASK_LIST_LOADING';
 export const GET_LIST = 'GET_LIST';
 export const GET_LIST_ASYNC = 'GET_LIST_ASYNC';
 export const ADD_TASK = 'ADD_TASK';
@@ -24,6 +26,10 @@ export const DELETE_TASK_ASYNC = 'DELETE_TASK_ASYNC';
 export const POPUP_IS_VISIBLE = 'POPUP_IS_VISIBLE';
 export const POPUP_DELETE = 'POPUP_DELETE';
 export const TASK_DETAILS_IS_VISIBLE = 'TASK_DETAILS_IS_VISIBLE';
+
+export const taskListLoading = (): TTaskListLoading => ({
+  type: CHANGE_TASK_LIST_LOADING
+});
 
 export const getList = (list: Array<TTask>): TGetList => ({
   type: GET_LIST,

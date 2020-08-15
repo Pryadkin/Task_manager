@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TaskList from '../../components/TaskList/TaskList';
 import TaskListHeader from '../../components/Header/TaskListHeader';
 import ListIsEmpty from '../../components/ListIsEmpty/ListIsEmpty';
-import { addTaskAsync, deleteTaskAsync, changeVisibilityPopup, popupDeleteVisibility } from '../../redux/actions/actions';
 import ContainerPopup from '../../components/Popup/ContainerPopup/ContainerPopup';
 import AddTaskPopup from '../../components/Popup/AddTaskPopup/AddTaskPopup';
 import DeletePopup from '../../components/Popup/DeletePopup/DeletePopup';
+import {
+  getListAsync,
+  addTaskAsync,
+  deleteTaskAsync,
+  changeVisibilityPopup,
+  popupDeleteVisibility
+} from '../../redux/actions/actions';
 
 import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
-
+import Preloader from '../../components/Preloader/Preloader';
 
 const TasksPage = () => {
   const dispatch = useDispatch();
   const tasklist = useSelector((state: IApplicationState) => state.taskReducer.tasklist);
   const popupIsVisible = useSelector((state: IApplicationState) => state.taskReducer.popupIsVisible);
   const popupDelete = useSelector((state: IApplicationState) => state.taskReducer.popupDelete);
+  const taskListIsLoading = useSelector((state: IApplicationState) => state.taskReducer.taskListIsLoading);
+  const [reqOnServer, getRegOnServer] = useState(false);
   const [taskId, setTaskId] = useState<number>();
+
+  // Загрузка данных с сервера происходит только один раз при открытии планировщика задач.
+  useEffect(() => {
+    if (tasklist.length === 0) {
+      if (!reqOnServer) {
+        getRegOnServer(true);
+        dispatch(getListAsync());
+      }
+    }
+  }, [tasklist, reqOnServer, dispatch])
 
   const onAddTask = (title: string) => {
     dispatch(addTaskAsync(title));
@@ -52,6 +70,12 @@ const TasksPage = () => {
           />
           :
           <ListIsEmpty />
+        }
+
+        {/* Preloader */}
+        {taskListIsLoading
+          ? <Preloader />
+          : null
         }
       </main>
 

@@ -59,16 +59,16 @@ const FormTaskDetails: React.FC<IProps> = props => {
 
       {
         errors.task?.type === "required" &&
-        <span className={s.warning}>
+        <div className={s.warning}>
           Заголовок не может быть пустым
-          </span>
+        </div>
       }
 
       {
         errors.task?.type === "maxLength" &&
-        <span className={s.warning}>
+        <div className={s.warning}>
           Описание не должно превышать 40 символов
-          </span>
+        </div>
       }
 
       <div className={s.btn}>

@@ -1,11 +1,14 @@
 @import './_fonts.scss';
 
+$body-background-color: #F2F2F2;
+$base-container-background-color: #fff;
+
 * {
   margin: 0;
 }
 
 body {
-  background-color: #F2F2F2;  
+  background-color: $body-background-color;  
   font-family: RobotoRegular;
 }
 
@@ -23,10 +26,14 @@ header {
   padding-bottom: 30px;
 }
 
+main {
+  position: relative;
+}
+
 .base-container {
   max-width: 1000px;  
   margin: 0 auto;
-  background-color: white;
+  background-color: $base-container-background-color;
 }
 
 .wrapper {

@@ -1,4 +1,5 @@
 import {
+  CHANGE_TASK_LIST_LOADING,
   GET_LIST,
   GET_LIST_ASYNC,
   ADD_TASK,
@@ -16,6 +17,10 @@ export type TTask = {
   id: number,
   title: string
 }
+
+export type TTaskListLoading = {
+  type: typeof CHANGE_TASK_LIST_LOADING
+};
 
 export type TGetList = {
   type: typeof GET_LIST
