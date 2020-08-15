@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
-import TasksPage from './pages/TasksPage/TasksPage';
+import TaskListPage from './pages/TaskListPage/TaskListPage';
 import TasksDetailsPage from './pages/TasksDetailsPage/TasksDetailsPage';
 import Footer from './components/Footer/Footer';
 
@@ -12,7 +12,7 @@ function App() {
       <div className="wrapper">
         <Switch>
           <Route path="/" exact>
-            <TasksPage />
+            <TaskListPage />
           </Route>
 
           <Route path="/details/:id" exact>

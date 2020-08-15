@@ -16,7 +16,7 @@ import {
 export type TTask = {
   id: number,
   title: string
-}
+}[];
 
 export type TTaskListLoading = {
   type: typeof CHANGE_TASK_LIST_LOADING
@@ -24,7 +24,7 @@ export type TTaskListLoading = {
 
 export type TGetList = {
   type: typeof GET_LIST
-  payload: any
+  payload: TTask
 };
 
 export type TGetListAsync = {

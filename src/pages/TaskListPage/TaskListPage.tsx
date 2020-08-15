@@ -6,6 +6,7 @@ import ListIsEmpty from '../../components/ListIsEmpty/ListIsEmpty';
 import ContainerPopup from '../../components/Popup/ContainerPopup/ContainerPopup';
 import AddTaskPopup from '../../components/Popup/AddTaskPopup/AddTaskPopup';
 import DeletePopup from '../../components/Popup/DeletePopup/DeletePopup';
+import Preloader from '../../components/Preloader/Preloader';
 import {
   getListAsync,
   addTaskAsync,
@@ -15,9 +16,8 @@ import {
 } from '../../redux/actions/actions';
 
 import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
-import Preloader from '../../components/Preloader/Preloader';
 
-const TasksPage = () => {
+const TaskListPage = () => {
   const dispatch = useDispatch();
   const tasklist = useSelector((state: IApplicationState) => state.taskReducer.tasklist);
   const popupIsVisible = useSelector((state: IApplicationState) => state.taskReducer.popupIsVisible);
@@ -106,7 +106,7 @@ const TasksPage = () => {
   )
 }
 
-export default TasksPage;
+export default TaskListPage;
 
 
 

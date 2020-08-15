@@ -12,9 +12,9 @@ interface ITaskList {
     title: string
   }[],
   deletePopup: (id: number) => void
-}
+};
 
-const TaskList = (props: ITaskList) => {
+const TaskList: React.FC<ITaskList> = props => {
   const {
     tasklist,
     deletePopup

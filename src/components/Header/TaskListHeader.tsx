@@ -3,8 +3,11 @@ import Button from '../Button/Button';
 
 import s from './TaskListHeader.module.scss';
 
-const Header = ({ visibleHandler }) => {
+interface IHeader {
+  visibleHandler: () => void;
+};
 
+const Header: React.FC<IHeader> = ({ visibleHandler }) => {
   return (
     <>
       <div className={s.container}>

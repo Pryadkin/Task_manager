@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 
 import s from './FormTaskDetails.module.scss';
 
-export interface IProps {
+interface IProps {
   id: number,
   taskValue: string,
   goBackHandler: () => void,
@@ -52,7 +52,7 @@ const FormTaskDetails: React.FC<IProps> = props => {
         defaultValue={taskValue}
         type="text"
         ref={register({
-          maxLength: 20,
+          maxLength: 40,
           required: true
         })}
       />

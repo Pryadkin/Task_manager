@@ -31,7 +31,7 @@ export const taskListLoading = (): TTaskListLoading => ({
   type: CHANGE_TASK_LIST_LOADING
 });
 
-export const getList = (list: Array<TTask>): TGetList => ({
+export const getList = (list: TTask): TGetList => ({
   type: GET_LIST,
   payload: list
 });
