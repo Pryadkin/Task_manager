@@ -1,9 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '../Button/Button';
+import Button from '../../Button/Button';
 
 import s from './AddTaskPopup.module.scss';
-import { ReactComponent as ReactCloseIcon } from '../../img/close.svg';
 
 interface IProps {
   onAddTask: (addTask: string) => void,
@@ -16,8 +15,7 @@ interface ITaskForm {
 
 const AddTaskPopup: React.FC<IProps> = props => {
   const {
-    onAddTask,
-    popupVisibleHandler
+    onAddTask
   } = props;
 
   const { register, handleSubmit, errors } = useForm<ITaskForm>();
@@ -28,9 +26,7 @@ const AddTaskPopup: React.FC<IProps> = props => {
 
   return (
     <>
-      <div className={s.background} />
       <form
-        className={s.form}
         onSubmit={onSubmit}
       >
         <label htmlFor="addTask" className={s.title}>
@@ -61,21 +57,15 @@ const AddTaskPopup: React.FC<IProps> = props => {
             Описание не должно превышать 40 символов
           </span>
         }
-
-        <div className={s.btn}>
-          <Button
-            text="Создать"
-            onClick={onSubmit}
-            color="green"
-          />
-        </div>
       </form>
 
-      <ReactCloseIcon
-        className={s.closeIcon}
-        onClick={popupVisibleHandler}
-        title="Закрыть"
-      />
+      <div className={s.btn}>
+        <Button
+          text="Создать"
+          onClick={onSubmit}
+          color="green"
+        />
+      </div>
     </>
   )
 }

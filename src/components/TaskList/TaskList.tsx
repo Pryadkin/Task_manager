@@ -11,13 +11,13 @@ interface ITaskList {
     id: number,
     title: string
   }[],
-  deleteTask: (id: number) => void
+  deletePopup: (id: number) => void
 }
 
 const TaskList = (props: ITaskList) => {
   const {
     tasklist,
-    deleteTask
+    deletePopup
   } = props;
   const history = useHistory();
 
@@ -59,7 +59,7 @@ const TaskList = (props: ITaskList) => {
 
                       <ReactDeleteIcon
                         className={s.deleteIcon}
-                        onClick={() => deleteTask(task.id)}
+                        onClick={() => deletePopup(task.id)}
                         title="Удалить"
                       />
                     </td>

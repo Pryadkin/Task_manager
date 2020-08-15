@@ -1,6 +1,4 @@
-// import { usersAPI, profileAPI } from "../api/api";
 import { Reducer } from 'react';
-import { } from 'react-redux';
 import { ITaskReducer } from './taskReducerTypes';
 
 import {
@@ -9,13 +7,15 @@ import {
   EDIT_TASK,
   DELETE_TASK,
   POPUP_IS_VISIBLE,
+  POPUP_DELETE,
   TASK_DETAILS_IS_VISIBLE
 } from '../actions/actions';
 
-const initialState = {
+const initialState: ITaskReducer = {
   tasklist: [],
   popupIsVisible: false,
-  tasksDetailsPage: false,
+  popupDelete: false,
+  tasksDetailsPage: false
 };
 
 interface IAction {
@@ -55,6 +55,11 @@ export const taskReducer: Reducer<ITaskReducer, IAction> = (state = initialState
       return {
         ...state,
         popupIsVisible: !state.popupIsVisible
+      };
+    case POPUP_DELETE:
+      return {
+        ...state,
+        popupDelete: !state.popupDelete
       };
     case TASK_DETAILS_IS_VISIBLE:
       return {

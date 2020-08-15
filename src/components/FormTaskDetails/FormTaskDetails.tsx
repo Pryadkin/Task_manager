@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
+import Button from '../Button/Button';
 
 import s from './FormTaskDetails.module.scss';
 
@@ -16,7 +17,6 @@ interface ITaskForm {
 
 const FormTaskDetails: React.FC<IProps> = props => {
   const {
-    id,
     goBackHandler,
     onAddTask,
     taskValue
@@ -42,14 +42,11 @@ const FormTaskDetails: React.FC<IProps> = props => {
       className={s.form}
       onSubmit={onSubmit}
     >
-      <h2>
-        {`Задача №${id}`}
-      </h2>
-
-      <label htmlFor="task">
+      <label htmlFor="task" className={s.title}>
         Краткое описание
       </label>
       <input
+        className={s.input}
         name="task"
         onChange={changeHandler}
         defaultValue={taskValue}
@@ -62,29 +59,34 @@ const FormTaskDetails: React.FC<IProps> = props => {
 
       {
         errors.task?.type === "required" &&
-        "Your input is required"
-      }
-      {
-        errors.task?.type === "maxLength" &&
-        "Your input exceed maxLength"
+        <span className={s.warning}>
+          Заголовок не может быть пустым
+          </span>
       }
 
-      {taskChanged
-        ?
-        <div
-          className={s.btn}
-          onClick={goBackHandler}
-        >
-          Вернуться в списку
-        </div>
-        :
-        <div
-          className={s.btn}
-          onClick={onSubmit}
-        >
-          Сохранить
-        </div>
+      {
+        errors.task?.type === "maxLength" &&
+        <span className={s.warning}>
+          Описание не должно превышать 40 символов
+          </span>
       }
+
+      <div className={s.btn}>
+        {taskChanged
+          ?
+          <Button
+            text="Вернуться в списку"
+            onClick={goBackHandler}
+            color="blue"
+          />
+          :
+          <Button
+            text="Сохранить"
+            onClick={onSubmit}
+            color="green"
+          />
+        }
+      </div>
     </form>
   )
 }

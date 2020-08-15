@@ -1,5 +1,6 @@
 $green: #39B54A;
 $red: #FF0000;
+$blue: #0071BC;
 
 .button {
   display: flex;
@@ -35,5 +36,13 @@ $red: #FF0000;
 
   &:hover {
     background: $red;
+  }
+}
+
+.blue {
+  border: 1px solid $blue;
+
+  &:hover {
+    background: $blue;
   }
 }

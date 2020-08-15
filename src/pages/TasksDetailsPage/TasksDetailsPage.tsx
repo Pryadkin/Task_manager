@@ -35,12 +35,22 @@ const TasksDetailsPage = () => {
   }, [id, tasklist])
 
   return (
-    <FormTaskDetails
-      id={+id}
-      goBackHandler={goBackHandler}
-      taskValue={taskValue}
-      onAddTask={onAddTask}
-    />
+    <>
+      <header>
+        <h2>
+          {`Задача №${id}`}
+        </h2>
+      </header>
+
+      <main>
+        <FormTaskDetails
+          id={+id}
+          goBackHandler={goBackHandler}
+          taskValue={taskValue}
+          onAddTask={onAddTask}
+        />
+      </main>
+    </>
   )
 }
 

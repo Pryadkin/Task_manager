@@ -7,6 +7,7 @@ import {
   DELETE_TASK,
   DELETE_TASK_ASYNC,
   POPUP_IS_VISIBLE,
+  POPUP_DELETE,
   TASK_DETAILS_IS_VISIBLE,
   ADD_TASK_ASYNC
 } from '../actions/actions';
@@ -66,6 +67,10 @@ export type TDeleteTaskAsync = {
 
 export type TChangeVisibilityPopup = {
   type: typeof POPUP_IS_VISIBLE
+};
+
+export type TPopupDeleteVisibility = {
+  type: typeof POPUP_DELETE
 };
 
 export type TChangeVisibilityTasksDetailsPage = {

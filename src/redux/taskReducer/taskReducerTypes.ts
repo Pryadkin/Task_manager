@@ -4,5 +4,6 @@ export interface ITaskReducer {
     title: string
   }[],
   popupIsVisible: boolean,
+  popupDelete: boolean,
   tasksDetailsPage: boolean,
 };

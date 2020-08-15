@@ -1,65 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TaskList from '../../components/TaskList/TaskList';
-import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
-import { addTaskAsync, deletTaskAsync, changeVisibilityPopup } from '../../redux/actions/actions';
+import TaskListHeader from '../../components/Header/TaskListHeader';
+import ListIsEmpty from '../../components/ListIsEmpty/ListIsEmpty';
+import { addTaskAsync, deleteTaskAsync, changeVisibilityPopup, popupDeleteVisibility } from '../../redux/actions/actions';
+import ContainerPopup from '../../components/Popup/ContainerPopup/ContainerPopup';
+import AddTaskPopup from '../../components/Popup/AddTaskPopup/AddTaskPopup';
+import DeletePopup from '../../components/Popup/DeletePopup/DeletePopup';
 
-import s from './TasksPage.module.scss';
-import AddTaskPopup from '../../components/AddTaskPopup/AddTaskPopup';
+import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
+
 
 const TasksPage = () => {
   const dispatch = useDispatch();
   const tasklist = useSelector((state: IApplicationState) => state.taskReducer.tasklist);
   const popupIsVisible = useSelector((state: IApplicationState) => state.taskReducer.popupIsVisible);
+  const popupDelete = useSelector((state: IApplicationState) => state.taskReducer.popupDelete);
+  const [taskId, setTaskId] = useState<number>();
 
   const onAddTask = (title: string) => {
-    console.log(title)
     dispatch(addTaskAsync(title));
     dispatch(changeVisibilityPopup());
   };
 
   const popupVisibleHandler = () => {
-    dispatch(changeVisibilityPopup())
+    dispatch(changeVisibilityPopup());
   };
 
   const deleteTask = (id: number) => {
-    dispatch(deletTaskAsync(id))
+    dispatch(deleteTaskAsync(id));
+    dispatch(popupDeleteVisibility());
+  };
+
+  const deletePopupHandler = (id: number | undefined) => {
+    dispatch(popupDeleteVisibility());
+    id && setTaskId(id);
   };
 
   return (
     <>
-      <div className={s.container}>
-        <h2 className={s.title}>
-          Список заданий
-        </h2>
+      <header>
+        <TaskListHeader visibleHandler={popupVisibleHandler} />
+      </header>
 
-        <div
-          className={s.button}
-          onClick={popupVisibleHandler}
-        >
-          Добавить
-        </div>
-      </div>
+      <main>
+        {tasklist.length > 0
+          ?
+          <TaskList
+            tasklist={tasklist}
+            deletePopup={deletePopupHandler}
+          />
+          :
+          <ListIsEmpty />
+        }
+      </main>
 
+      {/* Всплывающие окна */}
       {popupIsVisible
         ?
-        <AddTaskPopup
-          onAddTask={onAddTask}
-          popupVisibleHandler={popupVisibleHandler}
-        />
+        <ContainerPopup close={popupVisibleHandler}>
+          <AddTaskPopup
+            onAddTask={onAddTask}
+            popupVisibleHandler={popupVisibleHandler}
+          />
+        </ContainerPopup>
         : null
       }
 
-      {tasklist
+      {popupDelete
         ?
-        <TaskList
-          tasklist={tasklist}
-          deleteTask={deleteTask}
-        />
-        : null
+        <ContainerPopup close={deletePopupHandler}>
+          <DeletePopup
+            id={taskId}
+            deleteTask={deleteTask}
+          />
+        </ContainerPopup>
+        :
+        null
       }
     </>
   )
 }
 
 export default TasksPage;
+
+
+
+
