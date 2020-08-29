@@ -24,7 +24,7 @@ function* getListAsync() {
 
     if (success) {
       yield put(taskListLoading());
-      yield put(getList(data.reverse()));
+      yield put(getList(data));
     }
 
     if (error) {

@@ -41,8 +41,8 @@ export const taskReducer: Reducer<ITaskReducer, IAction> = (state = initialState
       return {
         ...state,
         tasklist: [
-          action.payload,
-          ...state.tasklist
+          ...state.tasklist,
+          action.payload
         ]
       };
     case EDIT_TASK:

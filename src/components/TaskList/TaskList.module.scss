@@ -41,3 +41,20 @@ td {
 .deleteIcon {
   fill: #F4583F;
 }
+
+// CSSTransition
+
+.alertEnter {
+  opacity: 0;
+  transition: .5s
+}
+.alertEnterActive {
+  opacity: 1;
+}
+.alertExit { 
+  opacity: 1;
+  transition: .5s
+}
+.alertExitActive {
+  opacity: 0;
+}
