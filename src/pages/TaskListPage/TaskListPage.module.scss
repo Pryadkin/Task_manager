@@ -1,0 +1,14 @@
+.alertEnter {
+  opacity: 0;
+  transition: .3s
+}
+.alertEnterActive {
+  opacity: 1;
+}
+.alertExit {
+  opacity: 1;
+  transition: .3s
+}
+.alertExitActive {
+  opacity: 0;
+}

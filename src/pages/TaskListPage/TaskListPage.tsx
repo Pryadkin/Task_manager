@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import TaskList from '../../components/TaskList/TaskList';
 import TaskListHeader from '../../components/Header/TaskListHeader';
 import ListIsEmpty from '../../components/ListIsEmpty/ListIsEmpty';
@@ -16,6 +17,8 @@ import {
 } from '../../redux/actions/actions';
 
 import { IApplicationState } from '../../redux/rootReducer/rootReducerType';
+
+import s from './TaskListPage.module.scss';
 
 const TaskListPage = () => {
   const dispatch = useDispatch();
@@ -80,28 +83,45 @@ const TaskListPage = () => {
       </main>
 
       {/* Всплывающие окна */}
-      {popupIsVisible
-        ?
+
+      <CSSTransition
+        in={popupIsVisible}
+        timeout={300}
+        unmountOnExit
+        classNames={{
+          enter: s.alertEnter,
+          enterActive: s.alertEnterActive,
+          exit: s.alertExit,
+          exitActive: s.alertExitActive
+        }}
+      >
         <ContainerPopup close={popupVisibleHandler}>
           <AddTaskPopup
             onAddTask={onAddTask}
             popupVisibleHandler={popupVisibleHandler}
           />
         </ContainerPopup>
-        : null
-      }
+      </CSSTransition>
 
-      {popupDelete
-        ?
+
+      <CSSTransition
+        in={popupDelete}
+        timeout={300}
+        unmountOnExit
+        classNames={{
+          enter: s.alertEnter,
+          enterActive: s.alertEnterActive,
+          exit: s.alertExit,
+          exitActive: s.alertExitActive
+        }}
+      >
         <ContainerPopup close={deletePopupHandler}>
           <DeletePopup
             id={taskId}
             deleteTask={deleteTask}
           />
         </ContainerPopup>
-        :
-        null
-      }
+      </CSSTransition>
     </>
   )
 }

@@ -3,9 +3,13 @@ import React from 'react';
 import s from './ContainerPopup.module.scss';
 import { ReactComponent as ReactCloseIcon } from '../../../img/close.svg';
 
+/**
+ * Container with className "containerCSSTransition" was created for CSSTransition.
+ */
+
 const ContainerPopup = ({ children, close }) => {
   return (
-    <>
+    <div className="containerCSSTransition">
       <div className={s.popup}>
         {children}
 
@@ -19,7 +23,7 @@ const ContainerPopup = ({ children, close }) => {
       </div>
 
       <div className={s.background} />
-    </>
+    </div>
   )
 }
 
